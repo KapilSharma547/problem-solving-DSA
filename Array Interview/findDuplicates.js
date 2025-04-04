@@ -1,5 +1,6 @@
+// Provide match First Dublicated Here
 // Approach - 1: Brute force
-let arr = [1, 2, 3, 4, 2, 5];
+let arr = [1, 2, 1, 3, 4, 2, 5];
 
 function findDuplicates(arr) {
   let duplicates = [];
@@ -13,7 +14,7 @@ function findDuplicates(arr) {
   }
   return duplicates;
 }
-console.log(findDuplicates([1, 2, 3, 4, 2, 5]));
+console.log(findDuplicates(arr));
 
 // Approach - 2: Object
 
@@ -47,16 +48,16 @@ console.log(Duplicates([9, 2, 3, 4, 2, 5, 6, 7, 8, 6]));
 // Approach - 3 (shortcut)
 
 function findDuplicates(arr) {
- let obj = {};
+  let obj = {};
 
- for (let i = 0; i < arr.length; i++) {
-   obj[arr[i]] = obj[arr[i]] + 1 || 1;
- }
- for (let key in obj) {
-   if (obj[key] > 1) {
-     console.log(key);
-   }
- }
+  for (let i = 0; i < arr.length; i++) {
+    obj[arr[i]] = obj[arr[i]] + 1 || 1;
+  }
+  for (let key in obj) {
+    if (obj[key] > 1) {
+      console.log(key);
+    }
+  }
 }
 findDuplicates([1, 9, 3, 4, 8, 5, 6, 9]);
 
@@ -65,21 +66,21 @@ findDuplicates([1, 9, 3, 4, 8, 5, 6, 9]);
 // let arr = [1,2,3,4,2,5,6]
 
 function findDuplicates(arr) {
- let result = [];
- let obj = {};
- let max = -Infinity;
- for (let i = 0; i < arr.length; i++) {
-   obj[arr[i]] = obj[arr[i]] + 1 || 1;
- }
- for (let key in obj) {
-   if (obj[key] > max) {
-     max = obj[key]; // max = -1, 1, 1,
-     result.push(key);
-   }
- }
+  let result = [];
+  let obj = {};
+  let max = -Infinity;
+  for (let i = 0; i < arr.length; i++) {
+    obj[arr[i]] = obj[arr[i]] + 1 || 1;
+  }
+  for (let key in obj) {
+    if (obj[key] > max) {
+      max = obj[key]; // max = -1, 1, 1,
+      result.push(key);
+    }
+  }
 
- // console.log(max, result, obj);
- console.log(result[result.length - 1]);
+  // console.log(max, result, obj);
+  console.log(result[result.length - 1]);
 }
 findDuplicates([1, 9, 3, 4, 8, 5, 6, 9, 4]);
 

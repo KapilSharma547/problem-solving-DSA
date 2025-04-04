@@ -1,56 +1,67 @@
-// function Array(arr) {
-//   let flattened = [];
+// Recursive Approach (Custom Function)
+function flattenArray(arr) {
+  let result = [];
 
-//   for (let i = 0; i < arr.length; i++) {
-//     const item = arr[i];
+  for (let item of arr) {
+    if (Array.isArray(item)) {
+      result = result.concat(flattenArray(item)); // Recursively flatten
+    } else {
+      result.push(item);
+    }
+  }
 
-//     if (typeof item === "object" && item !== null) {
-//       flattened = flattened.concat(Array(item));
-//     } else {
-//       flattened.push(item);
-//     }
-//   }
+  return result;
+}
 
-//   return flattened;
-// }
+// 2
+const nestedArray1 = [1, [2, [3, 4]], 5, [6]];
+console.log("Recursive →", flattenArray(nestedArray1));
+// Output: [1, 2, 3, 4, 5, 6]
 
-// const nestedArray = [1, [2, [3, 4]], 5, [6]];
-// const flattenedArray = Array(nestedArray);
-// console.log(flattenedArray); // Output: [1, 2, 3, 4, 5, 6]
 
-function Array(arr) {
+// 2. Built-in .flat() Method (ES2019+)
+const nestedArray2 = [1, [2, [3, 4]], 5, [6]];
+console.log("flat(2) →", nestedArray2.flat(2));         // Flattens 2 levels
+console.log("flat(Infinity) →", nestedArray2.flat(Infinity)); // Flattens all levels
+
+
+// 3rd Approch
+function flattenIterative(arr) {
+  const stack = [...arr];
+  const result = [];
+
+  while (stack.length) {
+    const next = stack.pop();
+    if (Array.isArray(next)) {
+      stack.push(...next); // Push items back into the stack
+    } else {
+      result.unshift(next); // Insert at start to maintain order
+    }
+  }
+
+  return result;
+}
+
+console.log("Iterative →", flattenIterative([1, [2, [3, 4]], 5, [6]]));
+// Output: [1, 2, 3, 4, 5, 6]
+
+
+// Iterative Approach (using Stack)
+function myArrayFlatten(arr) {
   let flattened = [];
 
   for (let i = 0; i < arr.length; i++) {
     const item = arr[i];
-    if (typeof item === "object" && item !== null) {
-      flattened = flattened.concat(Array(item));
-      // console.log(Array(item));
+    if (Array.isArray(item)) {
+      flattened = flattened.concat(myArrayFlatten(item));
     } else {
       flattened.push(item);
     }
   }
+
   return flattened;
 }
-const nestedArray = [1, [2, [3, 4]], 5, [6]];
-const flattenedArray = Array(nestedArray);
-console.log(flattenedArray);
 
-// { without function }
-// const nesteArray = [1, [2, [3, 4]], 5, [6]];
-// let flattened = [];
-
-// for (let i = 0; i < nestedArray.length; i++) {
-//   const item = nesteArray[i];
-
-//   if (Array.isArray(item)) {
-//     for (let j = 0; j < item.length; j++) {
-//       const nestedItem = item[j];
-//       flattened.push(nestedItem);
-//     }
-//   } else {
-//     flattened.push(item);
-//   }
-// }
-
-// console.log(flattened); // Output: [1, 2, [3, 4], 5, 6]
+const nestedArray3 = [1, [2, [3, 4]], 5, [6]];
+console.log("Custom Renamed →", myArrayFlatten(nestedArray3));
+// Output: [1, 2, 3, 4, 5, 6]
