@@ -1,3 +1,10 @@
+// ✅ Question: Rotate Array by K Steps
+// Problem Statement:
+
+// Given an array nums, rotate the array to the right by k steps, where k is a non - negative integer.
+
+// 🔁 Rotation means: Each element is shifted to the right by k positions.The elements that fall off the end wrap around to the beginning.
+
 // Rotate array by k
 // let nums = [1, 2, 3, 4, 5, 6, 7];
 // let k = 3;
